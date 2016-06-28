@@ -1,0 +1,59 @@
+<library path="lib/librviz_my_tools">
+  <class name="rviz_my_tools/Teleop"
+         type="rviz_my_tools::TeleopPanel"
+         base_class_type="rviz::Panel">
+    <description>
+      A panel widget allowing simple diff-drive style robot base control.
+    </description>
+  </class>
+  <class name="rviz_my_tools/DAO"
+         type="rviz_my_tools::DynamicAddObstacles"
+         base_class_type="rviz::Panel">
+    <description>
+      A panel widget allowing simple diff-drive style robot base control.
+    </description>
+  </class>
+  <class name="rviz_my_tools/Imu"
+         type="rviz_my_tools::ImuDisplay"
+         base_class_type="rviz::Display">
+    <description>
+      Displays direction and scale of accelerations from sensor_msgs/Imu messages.
+    </description>
+    <message_type>sensor_msgs/Imu</message_type>
+  </class>
+  <class name="rviz_my_tools/Tropical_Plant"
+         type="rviz_my_tools::PlantFlagTool"
+         base_class_type="rviz::Tool">
+    <description>
+      Tool for planting flags on the ground plane in rviz.
+    </description>
+  </class>
+  <class name="rviz_my_tools/Potting"
+         type="rviz_my_tools::PottingTool"
+         base_class_type="rviz::Tool">
+    <description>
+      Tool for planting flags on the ground plane in rviz.
+    </description>
+  </class>
+  <class name="rviz_my_tools/Dog"
+         type="rviz_my_tools::DogTool"
+         base_class_type="rviz::Tool">
+    <description>
+      Tool for planting flags on the ground plane in rviz.
+    </description>
+  </class>
+  <class name="rviz_my_tools/TeaTable"
+         type="rviz_my_tools::TeaTableTool"
+         base_class_type="rviz::Tool">
+    <description>
+      Tool for planting flags on the ground plane in rviz.
+    </description>
+  </class>
+  <class name="rviz_my_tools/Finish"
+         type="rviz_my_tools::FinishTool"
+         base_class_type="rviz::Tool">
+    <description>
+      Tool for planting flags on the ground plane in rviz.
+    </description>
+  </class>
+</library>

@@ -1,0 +1,15 @@
+{
+    "name": "com.ubuntu.developer.username.rviz-my-tools",
+    "description": "description of rviz-my-tools",
+    "framework": "ubuntu-sdk-14.04-qml",
+    "architecture": "all",
+    "title": "rviz-my-tools",
+    "hooks": {
+        "rviz-my-tools": {
+            "apparmor": "rviz-my-tools.json",
+            "desktop": "rviz_my_tools.desktop"
+        }
+    },
+    "version": "0.1",
+    "maintainer": ""
+}
