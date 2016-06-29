@@ -97,12 +97,17 @@ FinishTool::~FinishTool()
 // is left as an exercise for the reader.
 void* reloadmapf(void* args)
 {
-  string pathfilepath="/home/rocwang/path.txt";
-  fstream pathfile;
+  char *p=getenv("USER");    
+  string username(p);
+  string pathfilepath="/home/";
+  pathfilepath+=username;
+  pathfilepath+="/path.txt";
   char* a;
   int len = pathfilepath.length();
   a =new char[len+1];
   strcpy(a,pathfilepath.c_str());
+
+  fstream pathfile;
   pathfile.open(a);
   string rootpath;
   pathfile>>rootpath;
@@ -121,7 +126,12 @@ void* reloadmapf(void* args)
 void FinishTool::activate()
 {
   Mat image;
-  string pathfilepath="/home/rocwang/path.txt";
+  char *q=getenv("USER");    
+  string username(q);
+  string pathfilepath="/home/";
+  pathfilepath+=username;
+  pathfilepath+="/path.txt";
+
   fstream pathfile;
   char* a;
   int len = pathfilepath.length();
