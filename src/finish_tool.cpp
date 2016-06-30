@@ -97,15 +97,26 @@ FinishTool::~FinishTool()
 // is left as an exercise for the reader.
 void* reloadmapf(void* args)
 {
-  char *q=getenv("USER");
-  string username(q);
-  string rootpath="/home/";
-  rootpath+=username;
-  rootpath+="/cafe_robot_single/";
-  string filepath4=rootpath+"src/nav_staff/map/edited_map.yaml";
+  char *p=getenv("USER");    
+  string username(p);
+  string pathfilepath="/home/";
+  pathfilepath+=username;
+  pathfilepath+="/path.txt";
+  char* a;
+  int len = pathfilepath.length();
+  a =new char[len+1];
+  strcpy(a,pathfilepath.c_str());
+
+  fstream pathfile;
+  pathfile.open(a);
+  string rootpath;
+  pathfile>>rootpath;
+  pathfile.close();
+
+  string filepath4=rootpath+"nav_staff/map/edited_map.yaml";
   string command="rosrun map_server map_server "+filepath4;
   char* c5;
-  int len = command.length();
+  len = command.length();
   c5 =new char[len+1];
   strcpy(c5,command.c_str());
   system(c5);
@@ -115,16 +126,51 @@ void* reloadmapf(void* args)
 void FinishTool::activate()
 {
   Mat image;
-  char *q=getenv("USER");
+  char *q=getenv("USER");    
   string username(q);
-  string rootpath="/home/";
-  rootpath+=username;
-  rootpath+="/cafe_robot_single/";
-  string filepath1=rootpath+"src/nav_staff/map/office_map_manual.pgm";
+  string pathfilepath="/home/";
+  pathfilepath+=username;
+  pathfilepath+="/path.txt";
+
+  fstream pathfile;
+  char* a;
+  int len = pathfilepath.length();
+  a =new char[len+1];
+  strcpy(a,pathfilepath.c_str());
+  pathfile.open(a);
+  string rootpath;
+  pathfile>>rootpath;
+  pathfile.close();
+
+  string filepath1=rootpath+"nav_staff/map/office_map_manual.pgm";
 //  char* c1;
 //  int len = filepath1.length();
 //  c1 =new char[len+1];
 //  strcpy(c1,filepath1.c_str());
+  string edited_map_path=rootpath+"nav_staff/map/edited_map.yaml";
+  string origin_map_path=rootpath+"nav_staff/map/office_map_manual.yaml";
+  char* b;
+  len = edited_map_path.length();
+  b =new char[len+1];
+  strcpy(b,edited_map_path.c_str());
+  char* b1;
+  len = origin_map_path.length();
+  b1 =new char[len+1];
+  strcpy(b1,origin_map_path.c_str());
+
+  fstream infile(b1);
+  string line;
+  ofstream outfile(b,ios::out|ios::trunc);
+  outfile<<"image: edited_map.pgm"<<endl;
+  getline(infile,line);
+  while(!infile.eof())
+  {
+      getline(infile,line);
+      outfile<<line<<endl;
+  }
+  outfile.close();
+  infile.close();
+
 
   image = imread(filepath1);
   Mat outimage;
@@ -139,7 +185,7 @@ void FinishTool::activate()
   
   string filepath2=rootpath+"obstacles.txt";  
   char* c2;
-  int len = filepath2.length();
+  len = filepath2.length();
   c2 =new char[len+1];
   strcpy(c2,filepath2.c_str());
   fstream file;
@@ -172,7 +218,7 @@ void FinishTool::activate()
     
   namedWindow( "zly", CV_WINDOW_AUTOSIZE );
   namedWindow("outimage",CV_WINDOW_AUTOSIZE);
-  string filepath3=rootpath+"src/nav_staff/map/edited_map.pgm";
+  string filepath3=rootpath+"nav_staff/map/edited_map.pgm";
 //  char* c3;
 //  len = filepath3.length();
 //  c3 =new char[len+1];

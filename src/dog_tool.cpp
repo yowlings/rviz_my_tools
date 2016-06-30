@@ -187,22 +187,31 @@ int DogTool::processMouseEvent( rviz::ViewportMouseEvent& event )
       if( event.leftDown() )
       {
         makeFlag( intersection );
-
-
-        char *p=getenv("USER");
+        char *p=getenv("USER");    
         string username(p);
-        string filepath="/home/";
-        filepath+=username;
-        filepath+="/cafe_robot_single/obstacles.txt";
+        string pathfilepath="/home/";
+        pathfilepath+=username;
+        pathfilepath+="/path.txt";
+
+        fstream pathfile;
+        char* a;
+        int len = pathfilepath.length();
+        a =new char[len+1];
+        strcpy(a,pathfilepath.c_str());
+        pathfile.open(a);
+        string rootpath;
+        pathfile>>rootpath;
+        pathfile.close();
+        string filepath;
+        filepath=rootpath+"obstacles.txt";
         char* c;
-        int len = filepath.length();
+        len = filepath.length();
         c =new char[len+1];
         strcpy(c,filepath.c_str());
         ofstream myfile(c,ios::app);//example.txt是你要输出的文件的名字
 
-        filepath="/home/";
-        filepath+=username;
-        filepath+="/cafe_robot_single/src/nav_staff/map/office_map_manual.yaml";
+        
+        filepath=rootpath+"nav_staff/map/office_map_manual.yaml";
         char* d;
         len = filepath.length();
         d =new char[len+1];
